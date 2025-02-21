@@ -125,18 +125,26 @@ void quicksort(int a[],int i ,int j) {
 }
 
 // bien the
-int partition(int a[],int i,int j) {
+int partition2(int a[],int i,int j) {
 	int pivot = a[i];
 	int l = i + 1;
 	int r = j;
 	while (l <= r) {
 		while(l<=r && a[l] <= pivot) l++;
 		while(l<=r && a[r] >= pivot) r--;
-		if(l < r) swap(&a[l],&a[r])
+		if(l < r) swap(&a[l],&a[r]);
 	}
+	swap(&a[r],&a[i]);
+	return r;
 }
 
-
+void quicksort2(recordtype a[],int i,int j) {
+	if(i < j) {
+		int p = partition2(a,i,j);
+		quicksort2(a,i,p-1);
+		quicksort2(a,p+1,j);
+	}
+}
 
 void pushdown (int a[],int first,int last) {
 	int r = first;
